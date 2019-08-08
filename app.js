@@ -9,7 +9,8 @@ const timerSecEl = document.querySelector('.timer__sec');
 // parse it and format into days, hours, min, sec
 
 function getTimeDifference(start, end) {
-  let milliseconds = Math.floor(end - start); 
+  let milliseconds = Math.floor(end - start);
+  let seconds = Math.floor(milliseconds / 1000);
   let minutes = Math.floor(seconds / 60);
   let hours = Math.floor(minutes / 60);
   let days = Math.floor(hours / 24);
@@ -22,7 +23,6 @@ function getTimeDifference(start, end) {
   if(hours < 10){hours = "0" + hours;}
   if(minutes < 10){minutes = "0" + minutes;}
   if(seconds < 10){seconds = "0" + seconds;}
-
   return {
     rDays: days,
     rHours: hours,
@@ -30,8 +30,6 @@ function getTimeDifference(start, end) {
     rSeconds: seconds
   }
 }
-
-
 
 let timer = setInterval(function() {
   const startDate = new Date();
@@ -44,9 +42,20 @@ let timer = setInterval(function() {
   timerSecEl.textContent = timeDifferenceObj.rSeconds;
 }, 1000)
 
-// stop when reaches zero. Still working on it:
+// console.log(getTimeDifference(startDate, endDate));
+//console.log(new Date().getUTCFullYear()); // how u create a new date
+// .get has a lot of options. Can just do console.log(new Date();
+// pass custom params:
+//console.log(new Date("April 26, 2018 07:30"));
+// console.log(new Date().getTime()); // get time is current tiem in ms since 1970
+// challenge: understand the calculations for converting lines 18-19, etc.
+// challenge: fix oval shapes for 1 digit numbers. So all circles are same
+// so if 1 day, have 01, instead of 1. Seconds 01 instead of 1, etc.
+// also, how/when should you stop the timer, when you reach the date. So
+// check if reached date using timeDifferenceObj, and check properties to see
+// if all are zeros
+// use timeDifferenceObj 
 // if (timeDifferenceObj.rDays === 0 && timeDifferenceObj.rHours === 0 && timeDifferenceObj.rMinutes === 0 && timeDifferenceObj.rSeconds === 0) {
   //   timeDifferenceObj.stop();
   //   return;
   // }
-
