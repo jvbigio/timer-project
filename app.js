@@ -19,28 +19,40 @@ function getTimeDifference(start, end) {
   minutes = minutes - (days * 24 * 60) - (hours * 60);
   seconds = seconds - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
 
-  if(days < 10){days = "0" + days;}
-  if(hours < 10){hours = "0" + hours;}
-  if(minutes < 10){minutes = "0" + minutes;}
-  if(seconds < 10){seconds = "0" + seconds;}
+  // if(days < 10){days = "0" + days;}
+  // if(hours < 10){hours = "0" + hours;}
+  // if(minutes < 10){minutes = "0" + minutes;}
+  // if(seconds < 10){seconds = "0" + seconds;}
   return {
     rDays: days,
     rHours: hours,
     rMinutes: minutes,
     rSeconds: seconds
+  };
+}
+
+function doubleDigitTimer(time) {
+  if (time < 10) {
+    return `0${time}`;
   }
+  return time;
 }
 
 let timer = setInterval(function() {
   const startDate = new Date();
-  const endDate = new Date("August 08 2019 16:38");
-
+  const endDate = new Date("August 10 2019 20:17");
   let timeDifferenceObj = getTimeDifference(startDate, endDate);
-  timerDayEl.textContent = timeDifferenceObj.rDays;
-  timerHourEl.textContent = timeDifferenceObj.rHours;
-  timerMinEl.textContent = timeDifferenceObj.rMinutes;
-  timerSecEl.textContent = timeDifferenceObj.rSeconds;
-}, 1000)
+
+  if (timeDifferenceObj.rDays === 0 && timeDifferenceObj.rHours === 0 && timeDifferenceObj.rMinutes === 0 && timeDifferenceObj.rSeconds === 0) {
+    clearInterval(timer);
+    return timer;
+  } else {
+    timerDayEl.textContent = doubleDigitTimer(timeDifferenceObj.rDays);
+    timerHourEl.textContent = doubleDigitTimer(timeDifferenceObj.rHours);
+    timerMinEl.textContent = doubleDigitTimer(timeDifferenceObj.rMinutes);
+    timerSecEl.textContent = doubleDigitTimer(timeDifferenceObj.rSeconds);
+  }
+}, 1000);
 
 // console.log(getTimeDifference(startDate, endDate));
 //console.log(new Date().getUTCFullYear()); // how u create a new date
