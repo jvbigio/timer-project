@@ -40,12 +40,13 @@ function doubleDigitTimer(time) {
 
 let timer = setInterval(function() {
   const startDate = new Date();
-  const endDate = new Date("August 10 2019 20:17");
+  const endDate = new Date("August 22 2019 19:15");
   let timeDifferenceObj = getTimeDifference(startDate, endDate);
 
   if (timeDifferenceObj.rDays === 0 && timeDifferenceObj.rHours === 0 && timeDifferenceObj.rMinutes === 0 && timeDifferenceObj.rSeconds === 0) {
-    clearInterval(timer);
-    return timer;
+    // clearInterval(timer);
+    // return timer;
+    clearTimeout(timer);
   } else {
     timerDayEl.textContent = doubleDigitTimer(timeDifferenceObj.rDays);
     timerHourEl.textContent = doubleDigitTimer(timeDifferenceObj.rHours);
